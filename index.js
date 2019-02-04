@@ -9,11 +9,10 @@ const routes = require('./config/routes')
 
 
 app.use(express.static(`${__dirname}/dist`))
-app.get('/*', (req, res) => res.sendFile(`${__dirname}/dist/index.html`))
-
 app.use(bodyParser.json())
-
 app.use(routes)
+
+app.get('/*', (req, res) => res.sendFile(`${__dirname}/dist/index.html`))
 
 
 mongoose.connect('mongodb://localhost/Luxury-Cars')
