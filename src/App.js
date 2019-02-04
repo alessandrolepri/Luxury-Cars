@@ -1,33 +1,38 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import axios from 'axios'
+
+
+import 'bulma'
+import './scss/style.scss'
+
+import { BrowserRouter, Link, Switch, Route } from 'react-router-dom'
+
+
+import Home from './components/Home'
+import CarsNew from './components/cars/CarsNew'
+import CarsIndex from './components/cars/CarsIndex'
 
 
 
 class App extends React.Component {
-  constructor() {
-    super()
-
-    this.state = {}
-
-  }
-
-  componentDidMount(){
-    axios.get('/api/cars')
-      .then(res => this.setState({ cars: res.data }))
-      .catch(err => console.log(err))
-  }
-
   render() {
-    if(!this.state.cars) return null
-    console.log(this.state.cars)
     return (
-      <div>
-        <h1>Ciao World</h1>
-        {this.state.cars.map(car =>
-          <p key={car._id}> {car.model} </p>
-        )}
-      </div>
+      <BrowserRouter>
+        <main>
+
+          <nav>
+            <Link to="/"> Home </Link>
+            <Link to="/cars"> Cars Index </Link>
+            <Link to="/cars/new"> Cars New </Link>
+          </nav>
+
+          <Switch>
+            <Route path="/cars/new" component={CarsNew} />
+            <Route path="/cars" component={CarsIndex} />
+            <Route path="/" component={Home} />
+          </Switch>
+        </main>
+      </BrowserRouter>
     )
   }
 }
