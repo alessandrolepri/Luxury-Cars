@@ -27,7 +27,7 @@ class CarsIndex extends React.Component {
 
           <div className="columns is-multiline">
             {this.state.cars.map(car =>
-              <div className="column is-one-quarter" key={car._id}>
+              <div className="column is-half desktop" key={car._id}>
                 <CarCars {...car} />
               </div>
             )}
