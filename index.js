@@ -4,6 +4,7 @@ const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
+const routes = require('./config/routes')
 
 
 
@@ -11,6 +12,9 @@ app.use(express.static(`${__dirname}/dist`))
 app.get('/*', (req, res) => res.sendFile(`${__dirname}/dist/index.html`))
 
 app.use(bodyParser.json())
+
+app.use(routes)
+
 
 mongoose.connect('mongodb://localhost/Luxury-Cars')
 
