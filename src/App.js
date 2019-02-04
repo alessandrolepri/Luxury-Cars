@@ -8,23 +8,26 @@ class App extends React.Component {
   constructor() {
     super()
 
-    this.state= {
-
-      cars: []
-    }
+    this.state = {}
 
   }
 
-  componentDidMount() {
+  componentDidMount(){
     axios.get('/api/cars')
       .then(res => this.setState({ cars: res.data }))
+      .catch(err => console.log(err))
   }
 
   render() {
-
+    if(!this.state.cars) return null
+    console.log(this.state.cars)
     return (
-
-      <h1>Hello World</h1>
+      <div>
+        <h1>Ciao World</h1>
+        {this.state.cars.map(car =>
+          <p key={car._id}> {car.model} </p>
+        )}
+      </div>
     )
   }
 }
